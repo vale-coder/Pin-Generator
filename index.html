@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di PIN</title>
+</head>
+<body>
+    <h1>Generatore di PIN</h1>
+    <button onclick="generatePin()">Genera PIN</button>
+    <p id="pinDisplay"></p>
+    <input type="text" id="pinInput" placeholder="Inserisci il PIN">
+    <button onclick="showMessage()">Mostra Messaggio</button>
+    <p id="messageDisplay"></p>
+
+    <script>
+        function generatePin() {
+            const pin = Math.floor(1000 + Math.random() * 9000); // Genera un PIN di 4 cifre
+            localStorage.setItem('savedPin', pin);
+            document.getElementById('pinDisplay').innerText = `Il tuo PIN è: ${pin}`;
+        }
+
+        function showMessage() {
+            const inputPin = document.getElementById('pinInput').value;
+            const savedPin = localStorage.getItem('savedPin');
+            if (inputPin === savedPin) {
+                document.getElementById('messageDisplay').innerText = `Ciao da ${inputPin}`;
+            } else {
+                document.getElementById('messageDisplay').innerText = 'PIN errato. Riprova.';
+            }
+        }
+    </script>
+</body>
+</html>
+
